@@ -9,7 +9,7 @@ import argparse
 
 # Set up Google search url with term
 searchterm = 'memes'
-url = "https://www.google.co.in/search?q="+searchterm+"&source=lnms&tbm=isch"
+url = f"https://www.google.co.in/search?q={searchterm}&source=lnms&tbm=isch"
 
 # Need to download Chromedriver, insert path to chromedriver inside parentheses in following line
 browser = webdriver.Chrome('C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe')
@@ -42,12 +42,12 @@ for _ in range(2000):
         try:
             r = requests.get(img, stream=True, headers={'User-agent': 'Mozilla/5.0'})
             if r.status_code == 200:
-                with open(searchterm+"/image_"+str(counter)+".png", 'wb') as f:
+                with open(f"{searchterm}/image_{str(counter)}.png", 'wb') as f:
                     r.raw.decode_content = True
                     shutil.copyfileobj(r.raw, f)
             succounter = succounter + 1
         except Exception as e:
-            print("could not load : "+img)
+            print(f"could not load : {img}")
             print(e)
 
 print(succounter, "pictures succesfully downloaded")
